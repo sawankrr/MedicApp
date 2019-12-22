@@ -1,0 +1,105 @@
+<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-md-8 offset-md-2">
+
+							<!-- Register Content -->
+							<div class="account-content">
+								<div class="row align-items-center justify-content-center">
+									<div class="col-md-7 col-lg-6 login-left">
+										<img src="assets/img/login-banner.png" class="img-fluid" alt="Doccure Register">
+									</div>
+									<div class="col-md-12 col-lg-6 login-right">
+										<div class="login-header">
+											<h3>Patient Register <a routerLink="/doctor-registration">Are you a Doctor?</a></h3>
+										</div>
+
+										<!-- Register Form -->
+										<form [formGroup]="form" (ngSubmit)="submitForm()">
+
+                       <!-- Progress Bar -->
+                      <div class="progress form-group" *ngIf="fileUploadService.percentDone">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                          [style.width.%]="fileUploadService.percentDone">
+                        </div>
+                      </div>
+
+											<div class="form-group form-focus">
+												<input type="text" class="form-control floating" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+												<label class="focus-label">Name</label>
+                        <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                        <div *ngIf="f.name.errors.required">Don't be shy to share</div>
+                    </div>
+											</div>
+											<div class="form-group form-focus">
+												<input type="text" class="form-control floating" formControlName="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+												<label class="focus-label">Mobile Number</label>
+                        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                        <div *ngIf="f.phone.errors.required">Where can we contact you?</div>
+                    </div>
+											</div>
+                      <div class="form-group form-focus">
+												<input  class="form-control floating" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+												<label class="focus-label">Email Id</label>
+                        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Enter your identity</div>
+                    </div>
+											</div>
+											<div class="form-group form-focus">
+												<input type="password" class="form-control floating" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+												<label class="focus-label">Create Password</label>
+                        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">For login, it would be must</div>
+                    </div>
+											</div>
+                      <div class="form-group form-focus">
+												<input  class="form-control floating" formControlName="city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+												<label class="focus-label">City</label>
+                        <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                        <div *ngIf="f.city.errors.required">Where you live?</div>
+                    </div>
+											</div>
+
+                    <!-- Image Preview -->
+                          <div class="form-group">
+                            <div class="preview" *ngIf="preview && preview !== null">
+                              <img [src]="preview" [ngStyle]="widthShort" [alt]="form.value.name">
+                            </div>
+                          </div>
+
+                          <!-- File Input -->
+                          <div class="form-group">
+                            <input type="file" (change)="uploadFile($event)">
+                          </div>
+
+
+                      <div class="form-group form-focus">
+												<input  class="form-control floating" formControlName="problem" [ngClass]="{ 'is-invalid': submitted && f.problem.errors }">
+												<label class="focus-label">Problem</label>
+                        <div *ngIf="submitted && f.problem.errors" class="invalid-feedback">
+                        <div *ngIf="f.problem.errors.required">What problem you faced?</div>
+                    </div>
+											</div>
+											<div class="text-right">
+												<a class="forgot-link" routerLink="/login">Already have an account?</a>
+											</div>
+											<button class="btn btn-primary btn-block btn-lg login-btn" type="submit">Signup</button>
+
+
+										</form>
+										<!-- /Register Form -->
+
+									</div>
+								</div>
+							</div>
+							<!-- /Register Content -->
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- /Page Content -->

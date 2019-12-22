@@ -1,0 +1,217 @@
+<!-- Breadcrumb -->
+			<div class="breadcrumb-bar">
+				<div class="container-fluid">
+					<div class="row align-items-center">
+						<div class="col-md-12 col-12">
+							<nav aria-label="breadcrumb" class="page-breadcrumb">
+								<ol class="breadcrumb">
+									<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+								</ol>
+							</nav>
+							<h2 class="breadcrumb-title">Dashboard </h2>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /Breadcrumb -->
+
+			<!-- Page Content -->
+			<div class="content">
+				<div class="container-fluid">
+
+					<div class="row">
+						<div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+
+						<app-dashboard-sidebar></app-dashboard-sidebar>
+
+						</div>
+
+						<div class="col-md-7 col-lg-8 col-xl-9">
+
+							<div class="row">
+								<div class="col-md-12">
+									<div class="card dash-card">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-md-12 col-lg-4">
+													<div class="dash-widget dct-border-rht">
+														<div class="circle-bar circle-bar1">
+															<div class="circle-graph1" data-percent="75">
+																<img src="assets/img/icon-01.png" class="img-fluid" alt="patient">
+															</div>
+														</div>
+														<div class="dash-widget-info">
+															<h6>Total Patient</h6>
+															<h3>1500</h3>
+															<p class="text-muted">Till Today</p>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-12 col-lg-4">
+													<div class="dash-widget dct-border-rht">
+														<div class="circle-bar circle-bar2">
+															<div class="circle-graph2" data-percent="65">
+																<img src="assets/img/icon-02.png" class="img-fluid" alt="Patient">
+															</div>
+														</div>
+														<div class="dash-widget-info">
+															<h6>Today Patient</h6>
+															<h3>160</h3>
+															<p class="text-muted">06, Nov 2019</p>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-md-12 col-lg-4">
+													<div class="dash-widget">
+														<div class="circle-bar circle-bar3">
+															<div class="circle-graph3" data-percent="50">
+																<img src="assets/img/icon-03.png" class="img-fluid" alt="Patient">
+															</div>
+														</div>
+														<div class="dash-widget-info">
+															<h6>Appoinments</h6>
+															<h3>85</h3>
+															<p class="text-muted">06, Apr 2019</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-12">
+									<h4 class="mb-4">Patient Appoinment</h4>
+									<div class="appointment-tab">
+
+										<!-- Appointment Tab -->
+										<ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
+											<li class="nav-item">
+												<a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">All</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="#today-appointments" data-toggle="tab">Today</a>
+											</li>
+										</ul>
+										<!-- /Appointment Tab -->
+
+										<div class="tab-content">
+
+											<!-- Upcoming Appointment Tab -->
+											<div class="tab-pane show active" id="upcoming-appointments">
+												<div class="card card-table mb-0">
+													<div class="card-body">
+														<div class="table-responsive">
+															<table class="table table-hover table-center mb-0">
+																<thead>
+																	<tr>
+																		<th>Patient Name</th>
+																		<th>Appt Date</th>
+																		<th>Purpose</th>
+																		<th>Type</th>
+																		<th></th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr *ngFor="let appointment of appointments">
+																		<td>
+																			<h2 class="table-avatar">
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{appointment.appointment_book[0].avatar}}" alt="User Image"></a>
+																				<a href="patient-profile.html">{{appointment.appointment_book[0].name}} <span>{{appointment.appointment_book[0].city}}</span></a>
+																			</h2>
+																		</td>
+																		<td>{{appointment.dateOfAppointment}} <span class="d-block text-info">{{getDateTime(appointment.timeOfAppointment)}}</span></td>
+																		<td>{{appointment.appointment_book[0].problem}}</td>
+																		<td>New Patient</td>
+																		<td class="text-right">
+                                    <ng-container *ngIf="appointment.currentStatus === 'Pending'; then pendingTemplate else otherTemplate"></ng-container>
+																			<div class="table-action">
+                                      <ng-template #pendingTemplate>
+                                        <button type="button" class="btn btn-sm bg-success-light" (click)="accept(appointment._id)">	<i class="fas fa-check"></i> Accept</button>
+                                        &nbsp;
+                                        <button type="button" class="btn btn-sm bg-danger-light" (click)="reject(appointment._id)">	<i class="fas fa-times"></i> Cancel</button>
+																			</ng-template>
+                                      <ng-template #otherTemplate>
+                                        <button type="button" class="btn btn-rounded btn-info">{{appointment.currentStatus}}</button>
+                                      </ng-template>
+                                      </div>
+
+																		</td>
+																	</tr>
+
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /Upcoming Appointment Tab -->
+
+											<!-- Today Appointment Tab -->
+											<div class="tab-pane" id="today-appointments">
+												<div class="card card-table mb-0">
+													<div class="card-body">
+														<div class="table-responsive">
+															<table class="table table-hover table-center mb-0">
+																<thead>
+																	<tr>
+																		<th>Patient Name</th>
+																		<th>Appt Date</th>
+																		<th>Purpose</th>
+																		<th>Type</th>
+																		<th class="text-center">Paid Amount</th>
+																		<th></th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr *ngFor="let aptDate of appointmentsByDate">
+																		<td>
+																			<h2 class="table-avatar">
+																				<a href="patient-profile.html" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="{{aptDate.appointment_book[0].avatar}}" alt="User Image"></a>
+																				<a href="patient-profile.html">{{aptDate.appointment_book[0].name}} <span>{{aptDate.appointment_book[0].city}}</span></a>
+																			</h2>
+																		</td>
+																		<td>{{aptDate.dateOfAppointment}} <span class="d-block text-info">{{getDateTime(aptDate.timeOfAppointment)}}</span></td>
+																		<td>{{aptDate.appointment_book[0].problem}}</td>
+																		<td>New Patient</td>
+																		<td class="text-right">
+                                    <ng-container *ngIf="aptDate.currentStatus === 'Pending'; then pendingTemplate else otherTemplate"></ng-container>
+																			<div class="table-action">
+                                      <ng-template #pendingTemplate>
+                                        <button type="button" class="btn btn-sm bg-success-light" (click)="accept(aptDate._id)">	<i class="fas fa-check"></i> Accept</button>
+                                        &nbsp;
+                                        <button type="button" class="btn btn-sm bg-danger-light" (click)="reject(aptDate._id)">	<i class="fas fa-times"></i> Cancel</button>
+																			</ng-template>
+                                      <ng-template #otherTemplate>
+                                        <button type="button" class="btn btn-rounded btn-info">{{aptDate.currentStatus}}</button>
+                                      </ng-template>
+                                      </div>
+
+																		</td>
+																	</tr>
+
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /Today Appointment Tab -->
+
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+
+			</div>
+			<!-- /Page Content -->

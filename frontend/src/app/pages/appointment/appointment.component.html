@@ -1,0 +1,90 @@
+<!-- Page Content -->
+			<div class="content">
+				<div class="container">
+
+					<div class="row">
+						<div class="col-12">
+
+							<div class="card">
+								<div class="card-body">
+									<div class="booking-doc-info">
+										<a href="doctor-profile.html" class="booking-doc-img">
+											<img src="{{doctor.avatar}}" alt="User Image">
+										</a>
+										<div class="booking-info">
+											<h4><a href="doctor-profile.html">Dr. {{doctor.name}} </a></h4>
+
+											<p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> {{doctor.city}}</p>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- Schedule Widget -->
+							<div class="card booking-schedule schedule-widget">
+
+								<!-- Schedule Header -->
+								<div class="schedule-header">
+									<div class="row">
+										<div class="col-md-12">
+
+											<!-- Day Slot -->
+											<div class="day-slot">
+
+												<ul>
+
+													<li *ngFor="let bookDate of aryDates">
+                            <span>{{bookDate.dateTxt}}</span>
+														<span class="slot-date">{{bookDate.onlyDate}}</span>
+													</li>
+
+
+												</ul>
+											</div>
+											<!-- /Day Slot -->
+
+										</div>
+									</div>
+								</div>
+								<!-- /Schedule Header -->
+
+								<!-- Schedule Content -->
+								<div class="schedule-cont">
+									<div class="row">
+										<div class="col-md-12">
+
+											<!-- Time Slot -->
+											<div class="time-slot">
+												<ul class="clearfix">
+													<li *ngFor="let bookDate of aryDates">
+                          	<a [ngClass]="{'booked': bookTime.isBook}" [attr.data-book-time]="bookTime.time" [attr.data-book-date]="bookDate.onlyDate" class="timing" *ngFor="let bookTime of bookDate.timeArray">
+															<span> {{bookTime.time}} </span> <span>AM</span>
+														</a>
+													</li>
+
+												</ul>
+											</div>
+											<!-- /Time Slot -->
+
+										</div>
+									</div>
+								</div>
+								<!-- /Schedule Content -->
+
+							</div>
+							<!-- /Schedule Widget -->
+
+							<!-- Submit Section -->
+							<div class="submit-section proceed-btn text-right">
+              <button class="btn btn-primary btn-block btn-lg submit-btn" (click)="bookAppointment()" type="submit">Book Appointment</button>
+
+							</div>
+							<!-- /Submit Section -->
+
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<!-- /Page Content -->

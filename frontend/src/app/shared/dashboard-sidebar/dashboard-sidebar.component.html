@@ -1,0 +1,49 @@
+<!-- Profile Sidebar -->
+							<div class="profile-sidebar">
+								<div class="widget-profile pro-widget-content">
+									<div class="profile-info-widget">
+										<a href="#" class="booking-doc-img">
+											<img src="{{sessionUser.avatar}}" alt="User Image">
+										</a>
+										<div class="profile-det-info">
+											<h3>{{sessionUser.usertype === 1 ? 'Dr. ':''}} {{sessionUser.name}}</h3>
+
+											<div class="patient-details">
+												<h5 class="mb-0">{{sessionUser.usertype === 1 ? sessionUser.problem : sessionUser.city}}</h5>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="dashboard-widget">
+									<nav class="dashboard-menu">
+										<ul>
+											<li class="active">
+												<a routerLink="{{sessionUser.usertype === 1 ? '/doctor-dashboard' : '/patient-dashboard'}}">
+													<i class="fas fa-columns"></i>
+													<span>Dashboard </span>
+												</a>
+											</li>
+
+											<li *ngIf="sessionUser.usertype===2">
+												<a routerLink="/search-doctor">
+													<i class="fas fa-user-injured"></i>
+													<span>Search Doctor</span>
+												</a>
+											</li>
+                      <li>
+												<a routerLink="{{sessionUser.usertype === 1 ? '/doctor-dashboard' : '/patient-dashboard'}}">
+													<i class="fas fa-calendar-check"></i>
+													<span>Appointments</span>
+												</a>
+											</li>
+											<li>
+												<a (click)="onLogout()">
+													<i class="fas fa-sign-out-alt"></i>
+													<span>Logout</span>
+												</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+							<!-- /Profile Sidebar -->
